@@ -1,7 +1,7 @@
 import { IsNumber, IsString } from "class-validator";
 import { PrimaryGeneratedColumn } from "typeorm";
 
-export class CreateTransactionDetails {
+export class CreateTransactionDetailsDto {
     @IsString()
     description: string
 
