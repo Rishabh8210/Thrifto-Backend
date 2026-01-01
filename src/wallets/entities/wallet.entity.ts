@@ -1,6 +1,6 @@
 import { Transactions } from "src/transactions/entities/transaction.entity";
 import { Users } from "src/users/entities/user.entity";
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn, Transaction } from "typeorm";
+import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Wallets {
@@ -19,12 +19,12 @@ export class Wallets {
     @ManyToOne(() => Users, (user) => user.wallets, { onDelete: 'CASCADE', onUpdate: 'CASCADE',nullable: false })
     user: Users
 
-    @ManyToOne(() => Transactions, (transaction) => transaction.wallet, { onDelete: 'CASCADE', onUpdate: 'CASCADE',nullable: false })
-    transaction: Transactions
+    @OneToMany(() => Transactions, (transaction) => transaction.wallet, { onDelete: 'CASCADE', onUpdate: 'CASCADE',nullable: false })
+    transactions: Transactions[]
 
-    @Column({name: 'created_at', type: 'timestamp', default: 'CURRENT_TIMESTAMP'})
+    @Column({name: 'created_at', type: 'timestamp', default: () => 'CURRENT_TIMESTAMP'})
     createdAt: Date
 
-    @Column({name: 'updated_at', type: 'timestamp', default: 'CURRENT_TIMESTAMP', onUpdate: 'CURRENT_TIMESTAMP',})
+    @Column({name: 'updated_at', type: 'timestamp', default: () => 'CURRENT_TIMESTAMP', onUpdate: 'CURRENT_TIMESTAMP',})
     updatedAt: Date
 }

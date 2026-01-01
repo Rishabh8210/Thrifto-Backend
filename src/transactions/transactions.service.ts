@@ -72,4 +72,8 @@ export class TransactionsService {
             console.log("Error: Something went wrong, Please went wrong")
         }
     }
+
+    // async getAllTransaction(transactionFilter: FindTransactionDto){
+
+    // }
 }

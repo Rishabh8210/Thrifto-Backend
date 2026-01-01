@@ -13,15 +13,15 @@ export class Transactions {
     @Column()
     amount: number
 
-    @ManyToOne(() => Wallets, (wallet) => wallet.transaction, { onDelete: 'CASCADE', onUpdate: 'CASCADE',nullable: false })
+    @ManyToOne(() => Wallets, (wallet) => wallet.transactions, { onDelete: 'CASCADE', onUpdate: 'CASCADE',nullable: false })
     wallet: Wallets
 
     @ManyToOne(() => Users, (user) => user.transactions, {onDelete: 'CASCADE', onUpdate: 'CASCADE',nullable: false})
     user: Users
 
-    @Column({name: 'created_at', type: 'timestamp', default: 'CURRENT_TIMESTAMP'})
+    @Column({name: 'created_at', type: 'timestamp', default: () => 'CURRENT_TIMESTAMP'})
     createdAt: Date
 
-    @Column({name: 'updated_at', type: 'timestamp', default: 'CURRENT_TIMESTAMP', onUpdate: 'CURRENT_TIMESTAMP',})
+    @Column({name: 'updated_at', type: 'timestamp', default: () => 'CURRENT_TIMESTAMP', onUpdate: 'CURRENT_TIMESTAMP',})
     updatedAt: Date
 }

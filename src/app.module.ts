@@ -9,6 +9,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigType } from '@nestjs/config';
 import { BcryptService } from './common/utils/bcrypt.service';
 import { AuthModule } from './auth/auth.module';
+import { WalletsModeule } from './wallets/wallets.module';
+import { TransactionsModule } from './transactions/transactions.module';
 
 @Module({
   imports: [
@@ -22,11 +24,14 @@ import { AuthModule } from './auth/auth.module';
       inject: [typeormConfig.KEY],
       useFactory: (config: ConfigType<typeof typeormConfig>) => (
         {
-          ...config
+          ...config,
+          autoLoadEntities: true,
         }
       )
     }),
     UsersModule,
+    WalletsModeule,
+    TransactionsModule,
     AuthModule
   ],
   controllers: [AppController],
